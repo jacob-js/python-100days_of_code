@@ -3,67 +3,11 @@ Tes
 """
 import random
 
-STAGES = ['''
-  +---+
-  |   |
-  O   |
- /|\  |
- / \  |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
- /    |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|   |
-      |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
-  |   |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
-      |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-      |
-      |
-      |
-      |
-=========
-''']
+from art import LOGO, STAGES
+from words import WORD_LIST
 
 STAGES.reverse()
 
-
-WORD_LIST = ['ardvark', 'baboon', 'camel']
 CHOSEN_WORD = random.choice(WORD_LIST)
 CHOSEN_BLANK = ['-'] * len(CHOSEN_WORD)
 
@@ -73,10 +17,12 @@ end_of_the_game = False
 LIVES = 6
 guesses = "".join(CHOSEN_BLANK)
 
+print(LOGO)
+
 print(f"The solution is {CHOSEN_WORD}")
 
 while end_of_the_game != True:
-    guess = input("Gues a letter : ").lower()
+    guess = input("Guess a letter : ").lower()
     correct = 0
 
     for (index, letter) in enumerate(CHOSEN_WORD):
@@ -93,6 +39,7 @@ while end_of_the_game != True:
 
     if guess not in CHOSEN_WORD:
         LIVES -= 1
+        print(f"You guessed {guess}, that's not in the word. You lose a life.")
         print(STAGES[LIVES])
 
 if "".join(CHOSEN_BLANK) != CHOSEN_WORD:
