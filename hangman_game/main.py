@@ -3,6 +3,8 @@ Tes
 """
 import random
 
+from click import clear
+
 from art import LOGO, STAGES
 from words import WORD_LIST
 
