@@ -1,37 +1,50 @@
+import re
 import string
+from art import logo
 
+should_continue = True
+
+print(logo)
 
 alphabets = list(string.ascii_lowercase)
-action = input("Enter the action to execute. 'd' to decode and e for encoding \n")
 
-while action not in ("d", "e"):
-    action = input("Please enter a valid action letter. 'd' to decode and e for encoding \n")
+def caesar(start_text, shift_amount, direction):
+    end_text = ""
+    msg = "The encoded text"
+    letters = alphabets + alphabets
+    if direction == "d":
+        shift_amount *= -1
+        msg = "The decoded text"
+    for l in start_text:
+        if re.match('[a-z]', l):
+            rel = letters[alphabets.index(l)+shift_amount]
+            end_text += rel
+        else:
+            end_text += l
+    print(f"{msg} is : {end_text}")
 
-message = input("Type your message : \n")
-shift = int(input("Shift number : \n"))
+while should_continue:
+    action = input("Enter the action to execute. 'd' to decode and 'e' for encoding : \n")
 
-def encode_msg():
-    crypted = ""
-    for l in message:
-        try:
-            rel = alphabets[alphabets.index(l)+shift]
-        except IndexError:
-            rel = alphabets[alphabets.index(l)-shift]
-        crypted += rel
-    print(f"The encoded message is : {crypted}")
+    while action not in ("d", "e"):
+        action = input("Please enter a valid action letter. 'd' to decode and 'e' for encoding : \n")
 
-def decode_msg():
-    decoded = ""
-    for l in message:
-        try:
-            rel = alphabets[alphabets.index(l)-shift]
-        except IndexError:
-            rel = alphabets[alphabets.index(l)+shift]
-        decoded += rel
-    
-    print(f"The decoded message is : {decoded}")
+    message = input("Type your message : \n").lower()
 
-if action == "d":
-    decode_msg()
-else:
-    encode_msg()
+    shift = int(input("Shift number : \n"))
+    while shift > alphabets.__len__():
+        shift = int(input(f"Please enter a number less than {len(alphabets)} : \n"))
+
+    caesar(message, shift, action)
+
+    choice = input("Do you want to go again ? y/n : \n").lower()
+    if choice == "n":
+        should_continue = False
+    elif choice == "y":
+        should_continue = True
+    else:
+        should_continue = False
+        print("You entered a bad choice")
+
+
+print("Good bye!")
