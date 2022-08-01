@@ -11,6 +11,7 @@ Want to take the course with me ?
 
 - [Hangman Game](hangman_game)
 - [Password generator](password_generator)
+- [Caesar cipher](caesar_cipher)
 
 
 ## Projects
