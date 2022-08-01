@@ -7,6 +7,6 @@ _**Caesar cipher** is a type of encryption where each letter in the plaintext is
 # How to run the project
 
 _Make sure you're in the right directory_
-    ```
-    python3 main.py
-    ```
+```   
+python3 main.py
+```
